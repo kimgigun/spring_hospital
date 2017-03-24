@@ -12,7 +12,7 @@
 		$('#patientGnb').addClass('gnb').css('height','40px')
 		$('#patientGnb li:nth-child(1)').click(function(){
 			alert('child 1');
-			location.href="${context}/patient.do?action=move&page=main";
+			location.href="${context.path}/patient.do?action=move&page=main";
 		});
 		$('#patientGnb li:nth-child(2)').click(function(){
 			alert('child2');

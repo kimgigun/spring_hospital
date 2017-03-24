@@ -154,7 +154,7 @@ job:회사원 employee 개발자 developer 스탭 staff 요리사 cook 선생 te
 		</div>
 		<p class="border_solid"></p>
 	</div>
-	<jsp:include page="../common/footer.jsp" />
+	
 </body>
 <script>
 	$(function(){

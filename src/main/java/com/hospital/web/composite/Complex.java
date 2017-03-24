@@ -5,6 +5,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.hospital.web.domain.ContextDTO;
 
+
+
 public class Complex {
 	public static class ContextFactory{
 	public static ContextDTO create(){

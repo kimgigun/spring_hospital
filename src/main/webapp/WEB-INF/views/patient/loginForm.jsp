@@ -36,13 +36,13 @@
 
 </div>
 	<p class="border_solid"></p>
-<jsp:include page="../common/footer.jsp"/>
+
 <script>
 $(function(){
 	var $loginForm=$('#loginForm');
 	var tab=$loginForm.find('table');
 	$('#loginForm input[value=로그인]').click(function(){
-		$loginForm.attr('action','${context}/patient.do');
+		$loginForm.attr('action','${context.path}/patient/login');
 		$loginForm.attr('method','post');
 	var idVal=tab.find('input[name=id]').val();
 	var pwVal=tab.find('input[name=password]').val();	

@@ -3,12 +3,13 @@ package com.hospital.web.domain;
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Component @Data
+@Component
+
 public class ContextDTO {
-	
 	private String path, js, css, img;
-
 	public String getPath() {
 		return path;
 	}
@@ -41,6 +42,6 @@ public class ContextDTO {
 		this.img = img;
 	}
 
-	
-	
-}
+
+
+		}

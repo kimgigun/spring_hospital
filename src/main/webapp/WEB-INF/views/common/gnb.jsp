@@ -30,24 +30,24 @@
 			commonGnb.addClass('gnb').css('height,40px');
 			commonGnb.find('li:nth-child(1)').click(function(){
 				alert('제이쿼리 테스트');
-				goPage('${context}/patient.do','move','registerForm');
+				goPage('${context.path}/patient/join');
 			});
 			
 			commonGnb.find('li:nth-child(2)').click(function(){
 				alert('차일드2번');
-				location.href="${context}/patient.do?action=move&page=loginForm";
+				location.href="${context.path}/patient/login";
 			});
 			commonGnb.find('li:nth-child(3)').click(function(){
 				alert('차일드3번');
-				location.href="${context}/patient.do?action=move&page=loginForm";
+				location.href="${context.path}/patient/login";
 			});
 			$('#commonGnb li:nth-child(4)').click(function(){
 				alert('차일드4번');
-				location.href="${context}/patient.do?action=move&page=loginForm";
+				location.href="${context.path}/patient/login";
 			});
 			$('#commonGnb li:nth-child(5)').click(function(){
 				alert('차일드5번');
-				goList('${context}/board.do','list','articleList','1');
+				location.href="${context.path}/patient/login";
 			});
 		});
 			</script>
