@@ -50,7 +50,7 @@ public class PatientMapper implements IPatientMapper{
 	@Override
 	public int exist(String id) throws Exception {
 		logger.info("PatientMapper - exist() {}","Enter");
-		return sqlSession.selectOne(namespace+".exist");
+		return sqlSession.selectOne(namespace+".exist",id);
 	}
 
 }

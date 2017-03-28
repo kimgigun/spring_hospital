@@ -33,7 +33,7 @@ public class PatientController {
 	@RequestMapping(value="/login")
 	public String goLogin(){
 		logger.info("PatientController {} goLogin!! ", "진입");
-		return "public:patient/loginForm";
+		return "public:common/loginForm";
 	}
 	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public String goLogin(@RequestParam("id")String id,@RequestParam("password")String password,Model model) throws Exception{
