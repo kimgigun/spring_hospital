@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
+encoding//src/main/resources/META-INF/sql/Mysql_hospital.properties=UTF-8
+encoding//src/main/resources/META-INF/sql/ora_hospital.properties=UTF-8
 encoding/<project>=UTF-8

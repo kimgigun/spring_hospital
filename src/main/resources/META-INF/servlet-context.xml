@@ -13,7 +13,8 @@
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
-	<!-- <mvc:resources location="/resources/" mapping="/resources/**"/> -->
+	<!-- <mvc:resources location="/resources/" mapp
+	ing="/resources/**"/> -->
 	<beans:bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 		<beans:property name="contentNegotiationManager" ref="contentNegotiationManager"/>
 		<beans:property name="viewResolvers">

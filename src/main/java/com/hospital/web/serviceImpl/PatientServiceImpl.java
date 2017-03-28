@@ -1,77 +1,76 @@
 package com.hospital.web.serviceImpl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.hospital.web.dao.PatientDAO;
 import com.hospital.web.domain.PatientDTO;
+import com.hospital.web.mapper.PatientMapper;
 import com.hospital.web.service.PatientService;
 
 @Service
 
 public class PatientServiceImpl implements PatientService{
-	@Autowired PatientDAO dao;
+	private static final Logger logger = LoggerFactory.getLogger(PatientServiceImpl.class);
+	@Autowired PatientMapper mapper;
+/*	@Autowired PatientDAO dao;*/
 	
-	/*private PatientDAO dao;
-	private PatientDTO session;
-	private static PatientServiceImpl instance=new PatientServiceImpl();
-	
-	public static PatientServiceImpl getInstance(){
-		return instance;
-	}
-	public PatientDTO getSession(){
-		return session;
-	}
-		private PatientServiceImpl(){
-		 dao=PatientDAOImpl.getInstance();
-		 session=new PatientDTO();
-	}*/
 	
 	@Override
 	public int join(PatientDTO patient)  throws Exception{
-		return dao.insert(patient);
+		logger.info("PatientServiceImpl {} insert!! ", "join진입");
+		return mapper.insert(patient);
 	}
 
 	@Override
 	public PatientDTO findById(String id) throws Exception {
-		return dao.selectById(id);
+		logger.info("PatientServiceImpl {} insert!! ", "impl진입");
+		return mapper.selectById(id);
 	}
 
 	@Override
-	public PatientDTO login(PatientDTO patient) throws Exception {
-		return patient;
-	/*	session = this.findById(patient.getPatID()); // member=this.findById(patient.getPatID())
-		return session;*/
+	public PatientDTO login(PatientDTO member) throws Exception {
+		logger.info("PatientServiceImpl {} insert!! ", "impl진입");
+		return mapper.selectById(member.getPatID());
+	
 	}
 
 	@Override
 	public int change(PatientDTO patient) throws Exception {
-		return dao.update(patient);
+		logger.info("PatientServiceImpl {} insert!! ", "impl진입");
+		return mapper.update(patient);
 	}
 
 	@Override
 	public int remove(PatientDTO patient)  throws Exception{
-		return dao.delete(patient);
+		logger.info("PatientServiceImpl {} insert!! ", "impl진입");
+		return mapper.delete(patient);
 	}
 
 	@Override
 	public boolean logout(PatientDTO patient) throws Exception {
-		/*session=null;*/
+		logger.info("PatientServiceImpl {} insert!! ", "impl진입");
 		return true;
 	}
 
 	@Override
 	public String getBirth(String patJumin) {
-	/*			String birth="";
-				System.out.println("쎼션이 살아있으면 null아니지!!-->"+session.getPatJumin());
-		birth="19"+patJumin.substring(0,2)+"year"+patJumin.substring(2,4)+
-				"month"+patJumin.substring(4,6)+"day";*/
+		logger.info("PatientServiceImpl {} insert!! ", "impl진입");
+
 		return getBirth(null);
 	}
 
 	@Override
 	public PatientDTO getSession() {
-		// TODO Auto-generated method stub
+		logger.info("PatientServiceImpl {} insert!! ", "impl진입");
 		return null;
 	}
+
+	@Override
+	public int count() throws Exception {
+		logger.info("PatientServiceImpl {} count!! ", "count 진입");
+		return mapper.count();
+	}
+	
 
 }

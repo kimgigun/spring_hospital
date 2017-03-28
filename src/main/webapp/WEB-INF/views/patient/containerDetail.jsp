@@ -6,7 +6,7 @@
 </style>
 
 
-<div class="con_setting" style="position: relative; top: 10px; text-align:center; width:100%">
+<div class="con_setting" style=" position: relative; top: 10px; text-align:center; width:100%">
       <div>
             <table class="pat_detail">
                   <tr style="text-align: left;">
