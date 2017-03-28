@@ -14,7 +14,10 @@ import com.hospital.web.domain.PatientDTO;
 import com.hospital.web.mapper.PatientMapper;
 import com.hospital.web.service.ExistService;
 import com.hospital.web.service.PatientService;
-
+/*=================
+ *@filename:Patient Controller
+ 
+ */
 @Controller
 @RequestMapping(value="/patient")
 public class PatientController {
@@ -54,7 +57,6 @@ public class PatientController {
 			movePosition= "public:common/loginForm";
 		}else{
 			patient=service.login(patient);
-		/*	logger.info("db다녀온결과: {}",patient.getPatID()+","+patient.getPatPass());*/
 			logger.info("DB 다녀온결과:{}","id 가 존재함");
 			logger.info("DB 다녀온결과?:{}","count");
 			if(patient.getPatPass().equals(password)){
