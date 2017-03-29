@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
      <ul id="commonGnb">
 			<li><a>고객:회원가입</a></li>
-			<li><a>고객:로그인</a></li>
-			<li><a>스탭:로그인</a></li>
-			<li><a>관리자:로그인</a></li>
+			<li><a>로그인</a></li>
 			<li><a>게시판</a></li>
 			<li class="dropdown">
 					<a href="<%=application.getContextPath()%>/admin.do?action=move&page=articleList">관리자</a>
@@ -29,26 +27,26 @@
 			var commonGnb=$('#commonGnb');
 			commonGnb.addClass('gnb').css('height,40px');
 			commonGnb.find('li:nth-child(1)').click(function(){
-				alert('제이쿼리 테스트');
+				alert('회원가입 가기');
 				goPage('${context.path}/patient/join');
 			});
 			
 			commonGnb.find('li:nth-child(2)').click(function(){
-				alert('차일드2번');
-				location.href="${context.path}/patient/login";
+				alert('로그인 가기');
+				location.href="${context.path}/login";
 			});
 			commonGnb.find('li:nth-child(3)').click(function(){
-				alert('차일드3번');
-				location.href="${context.path}/patient/login";
+				alert('게시판 가기');
+				location.href="${context.path}/board/list";
 			});
-			$('#commonGnb li:nth-child(4)').click(function(){
+		/* 	$('#commonGnb li:nth-child(4)').click(function(){
 				alert('차일드4번');
 				location.href="${context.path}/patient/login";
 			});
 			$('#commonGnb li:nth-child(5)').click(function(){
 				alert('차일드5번');
 				location.href="${context.path}/patient/login";
-			});
+			}); */
 		});
 			</script>
 		

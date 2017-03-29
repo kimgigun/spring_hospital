@@ -1,13 +1,14 @@
 package com.hospital.web.domain;
-
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Lazy;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-@Component @Data
-public class Nurse {
-	@Getter @Setter
-	private String nurID, nurPass, marjorJob, nurName, nurGen, nurPhone, nurEmail, nurPosition;
+@Data @Lazy 
+public class Nurse extends Info{
+	private String major,position;
 
+	@Override
+	public String getGroup() {
+		return "Nurse";
+		
+	}
 }

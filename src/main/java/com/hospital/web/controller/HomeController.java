@@ -1,4 +1,4 @@
-package com.hospital.web.Controller;
+package com.hospital.web.controller;
 
 
 import javax.servlet.http.HttpSession;

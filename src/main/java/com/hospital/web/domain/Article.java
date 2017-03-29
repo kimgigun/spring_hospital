@@ -2,16 +2,22 @@ package com.hospital.web.domain;
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-@Component @Data
+@Data @Component
 public class Article {
-	@Getter @Setter
-	private String art_seq,
-						id,
-						title,
-						contents,
-						regdate,
-						read_Count;
+	
+	private String seq,
+	 				id,
+	 				title,
+	 				content,
+	 				regdate,
+	 				readCount;
 
+	public String getSeq() {
+		return seq;
+	}
+
+	public void setSeq(String seq) {
+		this.seq = seq;
+	}
+	
 }
