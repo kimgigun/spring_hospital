@@ -12,15 +12,15 @@
 		$('#patientGnb').addClass('gnb').css('height','40px')
 		$('#patientGnb li:nth-child(1)').click(function(){
 			alert('child 1');
-			location.href="${context.path}/patient.do?action=move&page=main";
+			location.href="${context.path}/patient";
 		});
 		$('#patientGnb li:nth-child(2)').click(function(){
 			alert('child2');
-			location.href="${context}/patient.do?action=mypage&page=detail";
+			location.href="${context.path}/patient.do?action=mypage&page=detail";
 		});
 		$('#patientGnb li:nth-child(3)').click(function(){
 			alert('child3');
-			location.href="${context}/patient.do?action=move&page=treatmentList";
+			location.href="${context.path}/patient.do?action=move&page=treatmentList";
 		});
 		$('#patientGnb li:nth-child(4)').click(function(){
 			alert('child4');
@@ -28,7 +28,7 @@
 		});
 		$('#patientGnb li:nth-child(5)').click(function(){
 			alert('child5');
-			location.href="${context}/home.do?action=logout&page=main";
+			location.href="${context.path}/logout";
 		});
 	});
 	</script>
