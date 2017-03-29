@@ -5,10 +5,11 @@ import org.springframework.stereotype.Component;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-
 @Component @Data
-public class AdminDTO {
+public class Doctor {
 	@Getter @Setter
-	private String admId,admPass,admName,admGen,admPhone,admEmail,admPermission;
+	private String docID,docPass,marjorTreat,docName,docGen,docPhone,docEmail,docPosition;
 
 }
+
+

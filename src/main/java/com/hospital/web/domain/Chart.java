@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 @Component @Data
-public class ChartDTO {
+public class Chart {
 	@Getter @Setter
 	private String charID,
 					treatID,

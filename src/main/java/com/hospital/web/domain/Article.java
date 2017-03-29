@@ -1,15 +1,17 @@
 package com.hospital.web.domain;
-
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 @Component @Data
-public class DoctorDTO {
+public class Article {
 	@Getter @Setter
-	private String docID,docPass,marjorTreat,docName,docGen,docPhone,docEmail,docPosition;
+	private String art_seq,
+						id,
+						title,
+						contents,
+						regdate,
+						read_Count;
 
 }
-
-

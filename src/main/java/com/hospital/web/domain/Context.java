@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Component
 
-public class ContextDTO {
+public class Context {
 	private String path, js, css, img;
 	public String getPath() {
 		return path;

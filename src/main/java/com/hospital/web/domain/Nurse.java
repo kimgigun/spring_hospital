@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 @Component @Data
-public class NurseDTO {
+public class Nurse {
 	@Getter @Setter
 	private String nurID, nurPass, marjorJob, nurName, nurGen, nurPhone, nurEmail, nurPosition;
 
