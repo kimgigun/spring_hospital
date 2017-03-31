@@ -118,6 +118,12 @@
     </set>
   WHERE id=#{id}
 </update>
+  <select id="delete" resultType="hashMap">
+    	DELETE
+    	FROM ${group}
+    	WHERE ${key}=#{value}
+  </select>
+
   
   
   <select id="count" resultType="int">

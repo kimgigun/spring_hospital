@@ -19,6 +19,8 @@
    <!-- Root Context: defines shared resources visible to all other web components -->
     <context:annotation-config/>
     <context:component-scan base-package="com.hospital.web"/>
+    
+    
     <mvc:annotation-driven /> 
    	<mvc:resources mapping="/resources/**" location="/resources/" />
     <mybatis-spring:scan base-package="com.hospital.web.mapper"/>

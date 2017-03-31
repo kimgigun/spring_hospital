@@ -3,6 +3,7 @@ package com.hospital.web.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -16,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.hospital.web.domain.Command;
 import com.hospital.web.domain.Doctor;
 import com.hospital.web.domain.Info;
+import com.hospital.web.domain.Nurse;
 import com.hospital.web.domain.Patient;
 import com.hospital.web.domain.Person;
-import com.hospital.web.domain.Schema;
+import com.hospital.web.domain.Enums;
 import com.hospital.web.mapper.Mapper;
 import com.hospital.web.service.CRUD;
 import com.hospital.web.service.CRUD.Service;
@@ -52,10 +55,14 @@ public class PermissionController {
 			Patient patient=(Patient) person.getInfo();
 			patient.setId(id);
 			patient.setPass(password);
+			
+			
 			Map<String,Object> map=new HashMap<>();
 			map.put("group",patient.getGroup());
-			map.put("key", Schema.PATIENT.getName());
+			map.put("key", Enums.PATIENT.getName());
 			map.put("value", id);
+			
+			
 			CRUD.Service ex=new CRUD.Service() {
 				
 				@Override
@@ -72,13 +79,8 @@ public class PermissionController {
 				logger.info("DB RESULT: {}", "ID not exist");
 				movePosition="public:common/loginForm";
 			}else{
-				CRUD.Service service=new CRUD.Service() {
-					@Override
-					public Object execute(Object o) throws Exception {
-						return mapper.findPatient(map);
-					}
-				};
-				patient=(Patient) service.execute(patient);
+				
+				patient=mapper.findPatient(map);
 				if(patient.getPass().equals(password)){
 					logger.info("DB RESULT: {}", "success");
 					session.setAttribute("permission",patient);
@@ -98,7 +100,7 @@ public class PermissionController {
 			doctor.setPass(password);
 			map=new HashMap<>();
 			map.put("group",doctor.getGroup());
-			map.put("key", Schema.DOCTOR.getName());
+			map.put("key", Enums.DOCTOR.getName());
 			map.put("value",id);
 			ex=new Service() {
 				
@@ -133,6 +135,51 @@ public class PermissionController {
 				}
 			}
 			break;
+			
+		case "nurse":
+			person=new Person<Info>(new Nurse());
+			Nurse nurse=(Nurse) person.getInfo();
+			nurse.setId(id);
+			nurse.setPass(password);
+			map=new HashMap<>();
+			map.put("group",nurse.getGroup());
+			map.put("key", Enums.NURSE.getName());
+			map.put("value",id);
+			ex=new Service() {
+				
+				@Override
+				public Object execute(Object o) throws Exception {
+					logger.info("======ID ? {} ======", o);
+					return mapper.exist(map);
+				}
+			};
+			
+			count=(Integer) ex.execute(id);
+			logger.info("ID exist ? {}", count);
+			if(count==0){
+				logger.info("DB RESULT: {}", "ID not exist");
+				movePosition="public:common/loginForm";
+			}else{
+				CRUD.Service service=new CRUD.Service() {
+					@Override
+					public Object execute(Object o) throws Exception {
+						return mapper.findDoctor(map);
+					}
+				};
+				nurse=(Nurse) service.execute(nurse);
+				if(nurse.getPass().equals(password)){
+					logger.info("DB RESULT: {}", "success");
+					session.setAttribute("permission",nurse);
+					model.addAttribute("doctor", nurse);
+					movePosition="patient:patient/containerDetail";
+				}else{
+					logger.info("DB RESULT: {}", "password not match");
+					movePosition="public:common/loginForm";
+				}
+			}
+			break;
+			
+			
 			
 		default:
 			break;
