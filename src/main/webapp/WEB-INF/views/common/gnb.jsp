@@ -3,26 +3,11 @@
 			<li><a>고객:회원가입</a></li>
 			<li><a>로그인</a></li>
 			<li><a>게시판</a></li>
-			<li class="dropdown">
-					<a href="<%=application.getContextPath()%>/admin.do?action=move&page=articleList">관리자</a>
-					<div class="dropdown_content">
-						<a href="html/staff/doctor.html">
-						<div style="padding:10px">의사</div></a>
-						<a href="html/staff/nurses.html">
-						<div style="padding:10px">간호사</div></a>
-						<a href="html/cutomer/patients.html">	
-						<div id="div3" style="padding:10px">환자</div></a>
-						<a href="html/staff/chart.html"><div style="padding:10px">차트</div></a>
-						<a href="html/customer/chart.html"><div style="padding:10px">진료</div></a>
-				</div>
-			</li>
 			<li class="tooltip"><a href="#">병원소개</a>
 			<span class="tooltiptext">구굴링하세요.</span>
 			</li>
-	</ul>
-	
+	</ul>	
 	<script>
-
 		$(function (){
 			var commonGnb=$('#commonGnb');
 			commonGnb.addClass('gnb').css('height,40px');
@@ -30,7 +15,6 @@
 				alert('회원가입 가기');
 				goPage('${context.path}/patient/join');
 			});
-			
 			commonGnb.find('li:nth-child(2)').click(function(){
 				alert('로그인 가기');
 				location.href="${context.path}/login";
@@ -39,14 +23,6 @@
 				alert('게시판 가기');
 				location.href="${context.path}/board/list";
 			});
-		/* 	$('#commonGnb li:nth-child(4)').click(function(){
-				alert('차일드4번');
-				location.href="${context.path}/patient/login";
-			});
-			$('#commonGnb li:nth-child(5)').click(function(){
-				alert('차일드5번');
-				location.href="${context.path}/patient/login";
-			}); */
 		});
 			</script>
 		

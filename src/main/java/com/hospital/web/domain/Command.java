@@ -20,6 +20,40 @@ public class Command implements Orderable{ //여러가지 명령어를 처리 �
 		map=new HashMap<>();
 	}
 	
+	@Override
+	public Command process(Map<?, ?> map) {
+		return new Command(map);
+	}
+	
+	public Person<?extends Info> getPersonInfo(){
+		Person<?>person=null;
+		switch(map.get("type").toString()){// key 만 써주면 값만 가르키고 있는 상태.tostring 까지 해줘야지 스트링값을 가져옴 
+		case "patient": 
+		person=new Person<Info>(new Patient());
+		Patient patient=(Patient) person.getInfo();
+	
+		patient.setId(map.get("id").toString());	
+		patient.setJob(map.get("job").toString());
+		patient.setJumin(map.get("pass").toString());
+		patient.setName(map.get("name").toString());
+		patient.setGen(map.get("gen").toString());
+		patient.setPhone(map.get("phone").toString());
+		patient.setJob(map.get("job").toString());
+		patient.setEmail(map.get("email").toString());
+		patient.setJumin(map.get("jumin").toString());
+		patient.setAddr(map.get("addr").toString());
+		patient.setDocID(map.get("docID").toString());
+		patient.setNurID(map.get("nurID").toString());
+		
+		break;
+		case "nurse":
+		person=new Person<Info>(new Patient());
+			break;
+		}
+		return person;
+	}
+
+	
 	public Integer[] getPageInfo() {
 		Paignation pg=new Paignation();
 		String pageNo=(String)map.get("pageNo");
@@ -39,34 +73,8 @@ public class Command implements Orderable{ //여러가지 명령어를 처리 �
 		return pg.getAttribute();
 	}
 	
-	public Person<?extends Info> getPersonInfo(){
-		Person<?>person=null;
-		switch(map.get("type").toString()){
-		case "patient": 
-		person=new Person<Info>(new Patient());
-		Patient patient=(Patient) person.getInfo();
-		patient.setAddr(map.get("addr").toString());	
-		patient.setJob(map.get("job").toString());
-		patient.setJumin(map.get("Jumin").toString());
-		patient.setDocID(map.get("DocID").toString());
-		patient.setNurID(map.get("NurID").toString());
-		
-		break;
-		case "nurse":
-		person=new Person<Info>(new Patient());
-			break;
-		case "doctor": 
-		person=new Person<Info>(new Patient());
-		break;
-		}
-		return person;
-	}
+	
 
-
-	@Override
-	public Command process(Map<?, ?> map) {
-		return new Command(map);
-	}
 	
 	class Paignation{
 		private int rowCount,pageNo,pageStart,pageEnd,pageCount,

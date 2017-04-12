@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hospital.web.mapper.Mapper;
 
-
-
 @Controller
 @RequestMapping("/patient")
 public class PatientController {

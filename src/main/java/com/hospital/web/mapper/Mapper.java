@@ -20,10 +20,10 @@ public interface Mapper {
 	public List<Patient> findPatients(Map<?,?> Hashmap)throws Exception;
 	public List<Doctor> findDoctors(Map<?,?> Hashmap)throws Exception;
 	public List<Nurse> findNurses(Map<?,?> Hashmap)throws Exception;
-	public int updatePatient(Patient patient)throws Exception;
-	public int updateDoctor(Patient patient)throws Exception;
-	public int updateNurse(Patient patient)throws Exception;
-	public int delete(Patient member)throws Exception;
+	public int updatePatient(Object o)throws Exception;
+	public int updateDoctor(Object o)throws Exception;
+	public int updateNurse(Object o)throws Exception;
+	public int delete(Map<?,?> Hashmap)throws Exception;
 	public int count(Map<?,?> Hashmap)throws Exception;
 	public int exist(Map<?,?> Hashmap)throws Exception;
 }

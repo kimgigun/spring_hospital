@@ -27,5 +27,6 @@
 	</classpathentry>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/hb2004/spring projects/sts-3/lombok.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/log4sql.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

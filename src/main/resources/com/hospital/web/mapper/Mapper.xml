@@ -39,8 +39,8 @@
     
    <!--C-->
     <insert id="registPatient">
-  INSERT INTO ${group}(${pat_id},${pat_pass},${pat_name},${pat_gen},${pat_phone},${pat_email},${pat_job},${pat_jumin},${pat_addr},${doc_id},${nur_id}) 
-  VALUES ( #{id}, #{pass}, #{name}, #{gen}, #{phone}, #{email},#{job}, #{jumin}, #{addr}, #{docID}, #{nurID})
+  INSERT INTO ${group}(pat_id,pat_pass,pat_name,pat_gen,pat_phone,pat_email,pat_job,pat_jumin,pat_addr,doc_id,nur_id)
+   VALUES ( #{id}, #{pass}, #{name}, #{gen}, #{phone}, #{email}, #{job}, #{jumin}, #{addr}, #{docID}, #{nurID})
 	</insert>
 	 <insert id="registDoctor">
   INSERT INTO ${group}(${doc_id},${doc_pass},${doc_name},${doc_gen},${doc_phone},${doc_email},${major_treat},${doc_position}) 
@@ -111,6 +111,25 @@
   <update id="updatePatient">
   UPDATE ${group}
     <set>
+      <if test="${pat_id} != null">${pat_id}=#{id},</if>
+      <if test="${pat_pass} != null">${pat_pass}=#{pass},</if>
+      <if test="{pat_name} != null">${pat_name}=#{name},</if>
+      <if test="{pat_gen} != null">${pat_gen}=#{gen},</if>
+      <if test="${pat_phone} != null">${pat_phone}=#{phone},</if>
+      <if test="${pat_job} != null">${pat_job}=#{job},</if>
+      <if test="${pat_email} != null">${pat_email}=#{email},</if>
+      <if test="${pat_jumin} != null">${pat_jumin}=#{jumin},</if>
+      <if test="${pat_addr} != null">${pat_addr}=#{addr},</if>
+      <if test="${doc_id}} != null">${doc_id}}=#{docID},</if>
+      <if test="${nur_id} != null">${nur_id}=#{nurID}</if>
+    </set>
+  WHERE id=#{id}
+</update>
+
+
+  <update id="updateDoctor">
+  UPDATE ${group}
+    <set>
       <if test="username != null">username=#{username},</if>
       <if test="password != null">password=#{password},</if>
       <if test="email != null">email=#{email},</if>
@@ -118,6 +137,18 @@
     </set>
   WHERE id=#{id}
 </update>
+  <update id="updateNurse">
+  UPDATE ${group}
+    <set>
+      <if test="username != null">username=#{username},</if>
+      <if test="password != null">password=#{password},</if>
+      <if test="email != null">email=#{email},</if>
+      <if test="bio != null">bio=#{bio}</if>
+    </set>
+  WHERE id=#{id}
+</update>
+
+
   <select id="delete" resultType="hashMap">
     	DELETE
     	FROM ${group}

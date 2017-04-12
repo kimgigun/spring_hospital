@@ -57,9 +57,9 @@ CREATE TABLE Patient(
     pat_gen VARCHAR(2) NOT NULL,
     pat_jumin VARCHAR(20) NOT NULL,
     pat_addr VARCHAR(20) NOT NULL,
-    pat_phone VARCHAR(20)NOT NULL,
-    pat_email VARCHAR(20)NULL,
-    pat_job VARCHAR(20)NULL,
+    pat_phone VARCHAR(20) NOT NULL,
+    pat_email VARCHAR(20) NULL,
+    pat_job VARCHAR(20) NULL,
     PRIMARY KEY(pat_id),
  
 )DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;

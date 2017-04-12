@@ -10,6 +10,7 @@ public class Patient extends Info{
    private Doctor doctor;
    private Nurse nurse;
    
+   
    public String getJob() {
 	return job;
 }	
@@ -70,4 +71,5 @@ public void setNurse(Nurse nurse) {
    public String getGroup() {
       return "Patient";
    }
+
 }

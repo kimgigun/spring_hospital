@@ -14,9 +14,9 @@
 			alert('child 1');
 			location.href="${context.path}/patient";
 		});
-		$('#patientGnb li:nth-child(2)').click(function(){
+		$('#patientGnb li:nth-child(2)').attr('method','post').click(function(){
 			alert('child2');
-			location.href="${context.path}/patient.do?action=mypage&page=detail";
+			location.href="${context.path}/goDelete";
 		});
 		$('#patientGnb li:nth-child(3)').click(function(){
 			alert('child3');

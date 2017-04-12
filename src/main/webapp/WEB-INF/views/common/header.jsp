@@ -21,7 +21,7 @@
 <div id="wrapper" class="width_full_size">
 <div id="header" class="width_full_size" style="height:40px;">
 	<div class="logo width_full_size text_center" style="height:40px;">
-		<a href="${context}/home.do?action=move&page=main"><img src="${context.img}/common/index_logo.png"/></a>
+		<a href="${context}/home.do?action=move&page=main"><img src="${img}/common/index_logo.png"/></a>
 	</div>
 	
 </div>
