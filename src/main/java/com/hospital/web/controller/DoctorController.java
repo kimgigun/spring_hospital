@@ -5,7 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-@Controller
+import org.springframework.web.bind.annotation.RestController;
+@RestController
 @RequestMapping("/doctor")
 public class DoctorController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);

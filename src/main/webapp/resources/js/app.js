@@ -1,11 +1,33 @@
-/*******************************************************************************
- * Model 
- * app.context 
- * app.session 
- * app.util 
- * app.algorithm 
- * app.oop
- ******************************************************************************/
+/*
+========= app-meta ==========
+app-algorithm 
+   app-algorithm-series
+   app-algorithm-array
+   app-algorithm-matrix
+   app-algorithm-math
+   app-algorithm-application
+app-component
+   app-component-button
+   app-component-input
+   app-component-alert
+   app-component-list
+   app-component-table
+app-context
+app-oop
+   app-oop-encapsulation
+   app-oop-inheritance
+   app-oop-polymorphism
+app-permission
+app-person
+   app-person-patient
+   app-person-doctor
+   app-person-nurse
+   app-person-admin
+app-session
+app-ui
+app-util
+==============================
+*/
 var app=app || {};
 app.context=(function(){
    var init=function(context){
@@ -17,6 +39,7 @@ app.context=(function(){
       app.component.init();
       app.algorithm.init();
       app.oop.init();
+      app.person.init();
    };
    var setContentView=function(){
    };
@@ -29,6 +52,14 @@ app.context=(function(){
    };
    
 })();
+/*
+========= app-session ====
+@AUTHOR : kimgigun1985@gmail.com
+@CREATE DATE : 2017-4-1
+@UPDATE DATE : 2017-4-1
+@DESC : 
+==============================
+*/
 app.session=(function(){
    var init=function(context){
       sessionStorage.setItem('context',context);
@@ -49,8 +80,17 @@ app.session=(function(){
    };
 })();
 app.util=(function(){})();
+
+/*
+========= app-session ====
+@AUTHOR : kimgigun1985@gmail.com
+@CREATE DATE : 2017-4-1
+@UPDATE DATE : 2017-4-1
+@DESC : 
+==============================
+*/
 app.algorithm=(function(){
-/* 알고리즘수열 */   
+
    var init=function(){
       onCreate();
    };
@@ -298,8 +338,6 @@ app.algorithm=(function(){
       });
    };
    
-   
-   
    var randomGen=function(){
       var i=0,k=0;
       var arr=[];
@@ -313,6 +351,7 @@ app.algorithm=(function(){
       }
       return arr;
    };
+   
 /* 알고리즘행열 */   
    var matrix=function(){
       var wrapper=app.component.getWrapper();
@@ -385,6 +424,7 @@ app.algorithm=(function(){
    var math=function(){
       var wrapper=app.component.getWrapper();
       $('#math').on('click',function(){
+         var wrapper=app.component.getWrapper();
           wrapper.empty();
           wrapper.append(app.algorithm.TABLE);
           var arr=[{id:'determinePrime',txt:'소수판별'},
@@ -400,16 +440,16 @@ app.algorithm=(function(){
           $.each(arr,function(i,j){
              str+='<li id="'+j.id+'" class="list-group-item"><a href="#">'+j.txt+'</a></li>';
           });
-          });
+          
          $('#tableLeft').html(str);
          determinePrime();
-      };
-   
+      });
+   };
    var determinePrime=function(){
       $('#determinePrime').on('click',function(){
          alert('determinePrime click');
-      })
-   }
+      });
+   };
    
 /* 알고리즘응용 */   
    var appl=function(){};   
@@ -473,8 +513,32 @@ app.oop=(function(){
 /*
  * 알고리즘 클래스
  */
+app.person=(function(){
+   var wrapper,ctx,img,js,css;
+   var init=function(){
+      wrapper=app.component.getWrapper();
+      ctx=app.session.getContextPath();
+      img=app.session.getImagePath();
+      js=app.session.getJavascriptPath();
+      css=app.session.getStylePath();
+      $('#wrapper').load(ctx+'/permission/form');
+   };
+   
+      return {
+         init:init
+      };
+})(); 
 
-app.person=(function() { 
+/*
+========= app-person ====
+@AUTHOR : kimgigun1985@gmail.com
+@CREATE DATE : 2017-4-1
+@UPDATE DATE : 2017-4-1
+@DESC : 
+==============================
+*/
+
+app.info=(function() { 
    var _name,_age,_gender,_job;
    return {
       setName : function(name){this._name=name;},
@@ -491,12 +555,14 @@ app.person=(function() {
    };
    
 })();
-/*******************************************************************************
- * View 
- * app.component 
- * app.navi 
- * app.patient
- ******************************************************************************/
+/*
+========= app-component ====
+	@AUTHOR : kimgigun1985@gmail.com
+	@CREATE DATE : 2017-4-1
+	@UPDATE DATE : 2017-4-1
+	@DESC : 
+==============================
+	*/
 app.component=(function(){
    var _body,_wrapper;
    var setBody=function(body){this._body=body;}
@@ -569,6 +635,7 @@ app.component=(function(){
       
    };
 })();
+
 app.style=(function(){
    var tableBorder=function(){
       
@@ -577,59 +644,231 @@ app.style=(function(){
       tableBorder : tableBorder
    };
 })();
+   app.permission=(function(){
+      var execute = function(){
+         alert("로그인 들어옴");
+         var ctx=app.session.getContextPath();
+         console.log('app.login context:'+ctx);
+       $('#login-submit').click(function(e) {
+          e.preventDefault();
+          $.ajax({url: ctx+"/login",
+               method: "POST",
+               data: JSON.stringify({ id : $('#username').val(), pass:$('#password').val()}),
+               dataType: "json",
+               contentType:"application/json",
+               success:function(data){
+                  if(data.result==='success'){
+                       $('#boot-nav').remove();
+                      $('#wrapper').html(app.ui.patientGnb());
+                      $('#wrapper').append(app.ui.patientDetail());
+                      $('#name').text(data.patient.name);
+                      $('#gen').text(data.patient.gen);
+                      $('#phone').text(data.patient.phone);
+                      $('#email').text(data.patient.email);
+                      $('#job').text(data.patient.job);
+                      $('#addr').text(data.patient.addr);
+                      $('#docID').text(data.patient.docID);
+                     var jumin=data.patient.jumin;
+                     var birth='';
+                     var age='';
+                     $('#btn-default').on('click',function(e){
+                        alert("차트가기 버튼클릭");
+                        e.preventDefault();
+                      $.ajax({
+                        url:ctx+'/get/chart',
+                        method:'POST',
+                        data:JSON.stringify({}),
+                        dataType:'json',
+                        contentType:'application/json',
+                        success:function(data){alert(data.chart);},
+                        error:function(x,s,m){alert(m)}
+                      });
+                     });
+                  }else{
+                     
+                     alert("조회된id 가 존재 하지 않습니다.");
+                  }
+                  
+               },
+               error:function(xhr,status,msg){
+                  alert('로그인 실패 이유:'+msg);
+               }
+           });
+         $("#login-form").delay(100).fadeIn(100);
+          $("#register-form").fadeOut(100);
+         $('#register-form-link').removeClass('active');
+         $(this).addClass('active');
+         e.preventDefault();
+      });
+      $('#register-form-link').click(function(e) {
+         $("#register-form").delay(100).fadeIn(100);
+          $("#login-form").fadeOut(100);
+         $('#login-form-link').removeClass('active');
+         $(this).addClass('active');
+         e.preventDefault();
+      });
+      /*
+       * 
+       * 
+       * */
+      $('#register-patient').on("click",function(e){
+         e.preventDefault();
+         var _id=$('#username').val();
+         var _pass=$('#password').val();
+         var _name=$('#name').val();
+         var _phone=$('#phone').val();
+         
+         if(app.util.validation(_id)
+            &&app.util.validation(_pass)
+            &&app.util.validation(_name)
+            &&app.util.validation(_phone)){
+            var json={
+                  'id':_id,
+                  'pass':_pass,
+                  'phone':_phone,
+                  'email':$('#email').val(),
+                  'name':_name
+            };
+            $.ajax({
+               url:ctx+'/post/patient',
+               method:"POST",
+               data:JSON.stringify(json),
+               dataType:'json',
+               contentType:'application/json',
+               success:function(data){
+                  alert("가입을 환영합니다."+data.name+"님");
+                  location.reload();
+               },
+               error:function(xhr,status,msg){alert('환자등록시'+msg);}
+         })
+         }else{
+            alert("반드시 있어야 하는 값입니다.")
+         }
+      });
+      $('#register-doctor').on("click",function(e){
+         e.preventDefault();
+      
+      });
+      $('#register-nurse').on("click",function(e){
+         e.preventDefault();
+      
+      });
+      $('#register-admin').on("click",function(e){
+         e.preventDefault();
+      
+      });
+      };
+      return {
+         execute :execute 
+      };
+   })();
 app.navi=(function(){})();
-app.patient=(function(){})();
-app.algorithm.TABLE=
-   '<table id="table" style="width:800px;height:300px;border-collapse: collapse;border: 1px solid black;margin:0 auto">'
-   +   '<tr style="border: 1px solid black;">'
-   +      '<td id="tableLeft" style="width: 50%;border: 1px solid black;"></td>'
-   +      '<td id="tableRight" style="width: 50%;border: 1px solid black;"></td>'
-   +   '</tr>'
-   +'</table>';
-app.algorithm.SERIES_MENU=
-   '<ul class="list-group">'
-   +   '<li id="aSeries" class="list-group-item"><a href="#">등차수열 합</a></li>'
-   +   '<li id="swSeries" class="list-group-item"><a href="#">스위치수열 합</a></li>'
-   +   '<li id="dSeries" class="list-group-item"><a href="#">계차수열 합</a></li>'
-   +   '<li id="factorial" class="list-group-item"><a href="#">팩토리얼수열 합</a></li>'
-   +   '<li id="fibonacci" class="list-group-item"><a href="#">피보나치수열 합</a></li>'
-   +'</ul>';
-app.oop.OOP_MENU=
-   '<ul class="list-group">'
-   +   '<li id="encap" class="list-group-item"><a href="#">캡슐화</a></li>'
-   +   '<li id="inherit" class="list-group-item"><a href="#">상 속</a></li>'
-   +   '<li id="poly" class="list-group-item"><a href="#">다형성</a></li>'
-   +'</ul>';
-app.algorithm.ARR_TABLE=
-   '<div class="row">'
-    +'<div class="col-sm-12">'
-    +'<div class="panel colourable">'
-    +'<div class="panel-heading">'
-    +'<span class="panel-title">IDC 2D Map</span>'
-    +'</div>'
-    +'<div class="panel-body">'
-    +    '<div class="init-table">'
-    +        '<span>Make Map</span>'
-    +        '<input type="text" id="mRow" placeholder="가로 행">'
-    +        '<input type="text" id="mCol" placeholder="세로 열">'
-    +        '<button type="submit" class="tc-btn btn btn-default">Create</button>'
-    +    '</div>'
-    +    '<div class="control-box" style="display: none;">'
-    +        '<span class="btn mRow-add">가로 행 추가 <i class="fa fa-plus"></i></span>'
-    +        '<span class="btn mRow-del">가로 행 제거 <i class="fa fa-minus"></i></span>'
-    +        '<span class="btn mCol-add">세로 열 추가 <i class="fa fa-plus"></i></span>'
-    +        '<span class="btn mCol-del">세로 열 제거 <i class="fa fa-minus"></i></span>'
-    +    '</div>'
-    +    '<div class="show-map text-center" style="padding-top: 15px;"><span>Not exist map. first, create map.</span></div>'
-    +'</div>'
-    +'</div>'
-    +'</div>'
-    +'</div>';
 
 
-
-
-
+app.ui={
+      algorithmArrayTable : function(){
+         return '<div class="row">'
+          +'<div class="col-sm-12">'
+          +'<div class="panel colourable">'
+          +'<div class="panel-heading">'
+          +'<span class="panel-title">IDC 2D Map</span>'
+          +'</div>'
+          +'<div class="panel-body">'
+          +    '<div class="init-table">'
+          +        '<span>Make Map</span>'
+          +        '<input type="text" id="mRow" placeholder="가로 행">'
+          +        '<input type="text" id="mCol" placeholder="세로 열">'
+          +        '<button type="submit" class="tc-btn btn btn-default">Create</button>'
+          +    '</div>'
+          +    '<div class="control-box" style="display: none;">'
+          +        '<span class="btn mRow-add">가로 행 추가 <i class="fa fa-plus"></i></span>'
+          +        '<span class="btn mRow-del">가로 행 제거 <i class="fa fa-minus"></i></span>'
+          +        '<span class="btn mCol-add">세로 열 추가 <i class="fa fa-plus"></i></span>'
+          +        '<span class="btn mCol-del">세로 열 제거 <i class="fa fa-minus"></i></span>'
+          +    '</div>'
+          +    '<div class="show-map text-center" style="padding-top: 15px;"><span>Not exist map. first, create map.</span></div>'
+          +'</div>'
+          +'</div>'
+          +'</div>'
+          +'</div>';
+      },
+      algorithmTable : function(){
+         return '<table id="table" style="width:800px;height:300px;border-collapse: collapse;border: 1px solid black;margin:0 auto">'
+         +   '<tr style="border: 1px solid black;">'
+         +      '<td id="tableLeft" style="width: 50%;border: 1px solid black;"></td>'
+         +      '<td id="tableRight" style="width: 50%;border: 1px solid black;"></td>'
+         +   '</tr>'
+         +'</table>';
+      },
+      algorithmSeriesMenu : function(){
+         return '<ul class="list-group">'
+         +   '<li id="aSeries" class="list-group-item"><a href="#">등차수열 합</a></li>'
+         +   '<li id="swSeries" class="list-group-item"><a href="#">스위치수열 합</a></li>'
+         +   '<li id="dSeries" class="list-group-item"><a href="#">계차수열 합</a></li>'
+         +   '<li id="factorial" class="list-group-item"><a href="#">팩토리얼수열 합</a></li>'
+         +   '<li id="fibonacci" class="list-group-item"><a href="#">피보나치수열 합</a></li>'
+         +'</ul>';
+      },
+      oopMenu : function(){
+         return '<ul class="list-group">'
+         +   '<li id="encap" class="list-group-item"><a href="#">캡슐화</a></li>'
+         +   '<li id="inherit" class="list-group-item"><a href="#">상 속</a></li>'
+         +   '<li id="poly" class="list-group-item"><a href="#">다형성</a></li>'
+         +'</ul>';
+      },
+      patientGnb : function(){
+         
+                var gnb = '<div style="position: relative; "><ul id="app-gnb" class="app-gnb" >';
+                var arr = ['home/홈으로','mypage/MY PAGE','treatlist/나의 진료기록','board/게시판','customer/고객참여마당','main/로그아웃'];
+                for(var i=0; i<6; i++){
+                   gnb+='<li><a href="'+arr[i].split("/")[0]+'">'+arr[i].split("/")[1]+'</a></li>'   
+                }
+               gnb += '</ul></div>';
+         return gnb;
+      },
+      patientDetail : function(){
+         var image = app.session.getImagePath();
+         var detail=
+          
+         '<div class="app-patient-detail">'
+         +     '<table id="app-table" class="app-table" >'
+         +          '<tr style="text-align: left;">'
+         +                 '<td colspan="5"><h3> 마이페이지</h3></td>'
+         +           '</tr><tr>'
+         +                '<td style="width: 100px" rowspan="5"><img src="'+image+'/common/defaultimg.jpg" alt="" /></td>'
+         +                '<td style="width: 100px" >이름</td>'
+         +                 '<td id="name" style="width: 150px"></td>'
+         +                 '<td style="width: 100px">직업</td>'
+         +                 '<td id="job" style="width: 150px" ></td></tr>'
+         +          '<tr><td>생년월일</td>'
+         +                 '<td></td>'
+         +                 '<td>키</td>'
+         +                 '<td ></td></tr> <tr>'
+         +                 '<td >성별</td>'
+         +                 '<td id="gen"></td>'
+         +                 '<td>나이/몸무게</td>'
+         +                 '<td></td>'
+         +           '</tr>'
+         +           '<tr>'
+         +                 '<td>전화번호</td>'
+         +                 '<td id="phone"></td>'
+         +                 '<td>혈액형</td>'
+         +                 '<td> </td>'
+         +           '</tr>'
+         +           '<tr>'
+         +                 '<td>주소</td>'
+         +                 '<td id="addr"></td>'
+         +                 '<td>주치의</td>'
+         +                 '<td id="docID">'
+         +               '<a onclick="docDetail()" href="#"> </a>'
+         +                 '</td>'
+         +           '</tr>'
+         +     '</table>'
+         +     '<input type="button" style="margin-top:20px" id="btn-default" class="btn btn-default" value="클 릭"/>'
+         +'</div>'
+         return detail;
+      }
+};
 
 
 
@@ -644,3 +883,17 @@ app.algorithm.ARR_TABLE=
  * 
  ******************************************************************************/
 app.controller=(function(){})();
+
+/*
+========= app-util ====
+@AUTHOR : kimgigun1985@gmail.com
+@CREATE DATE : 2017-4-1
+@UPDATE DATE : 2017-4-1
+@DESC : 
+==============================
+*/
+app.util={
+	      validation:function(x){
+	         return(x !="");
+	      }
+	};

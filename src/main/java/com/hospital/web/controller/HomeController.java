@@ -7,10 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.hospital.web.composite.Complex;
 
-@Controller()
+@Controller
 public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	// @Autowired ContextDTO context;
@@ -25,5 +26,9 @@ public class HomeController {
 	public String home(){
 		logger.info("Welcome {} !! ", "main");
 		return "public:common/container";
+	}
+	@RequestMapping(value="/permission/form")
+	public String login(){
+		return "common/permission.jsp";
 	}
 }

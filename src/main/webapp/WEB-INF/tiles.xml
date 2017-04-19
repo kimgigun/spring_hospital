@@ -21,4 +21,17 @@
 		<definition name="patient:*/*" extends="patient">
 		<put-attribute name="container" value="/WEB-INF/views/{1}/{2}.jsp"/>
 	</definition>
+	<!-- no tiles -->
+	<definition name="noTiles" template="/WEB-INF/views/layout/noTemplate.jsp">
+		<put-attribute name="noTemplate" value=""/>
+	</definition>
+	<definition name="*.jsp" extends="noTiles">
+		<put-attribute name="noTemplate" value="/WEB-INF/views/{1}.jsp"></put-attribute>
+	</definition>
+	<definition name="*/*.jsp" extends="noTiles">
+		<put-attribute name="noTemplate" value="/WEB-INF/views/{1}/{2}.jsp"></put-attribute>
+	</definition>
+	<definition name="*/*/*.jsp" extends="noTiles">
+		<put-attribute name="noTemplate" value="/WEB-INF/views/{1}/{2}/{3}.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>

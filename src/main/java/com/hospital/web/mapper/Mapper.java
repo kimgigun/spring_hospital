@@ -14,6 +14,7 @@ public interface Mapper {
 	public int registPatient(Object o)throws Exception;
 	public int registDoctor(Object o)throws Exception;
 	public int registNurse(Object o)throws Exception;
+	public int registAdmin(Object o)throws Exception;
 	public Patient findPatient(Map<?,?> Hashmap)throws Exception;
 	public Doctor findDoctor(Map<?,?> Hashmap)throws Exception;
 	public Nurse findNurse(Map<?,?> Hashmap)throws Exception;
@@ -23,8 +24,9 @@ public interface Mapper {
 	public int updatePatient(Object o)throws Exception;
 	public int updateDoctor(Object o)throws Exception;
 	public int updateNurse(Object o)throws Exception;
-	public int delete(Map<?,?> Hashmap)throws Exception;
+	public int delete(Object o)throws Exception;
 	public int count(Map<?,?> Hashmap)throws Exception;
 	public int exist(Map<?,?> Hashmap)throws Exception;
+	public Object findAdmin(Object object);
 }
 

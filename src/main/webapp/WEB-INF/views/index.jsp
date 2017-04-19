@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<%-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="${context}/resources/js/hospital.js"></script>
 <img src="${img}/common/loading.gif" alt="" /> 
 <script>
  $(function() {
    goPage('${context}/home')
-}); 
+});  --%>
 </script>
 <script
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"/></script>
@@ -18,9 +18,11 @@
    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
    crossorigin="anonymous">
 <script src="${context}/resources/js/app.js"></script>
+<link rel=stylesheet href="${context}/resources/css/reset.css">
+<link rel=stylesheet href="${context}/resources/css/app.css">
 </head>
 <body>
-   <nav class="navbar navbar-inverse">
+   <nav id="boot-nav" class="navbar navbar-inverse">
       <div class="container-fluid">
          <!-- Brand and toggle get grouped for better mobile display -->
          <div class="navbar-header">
@@ -31,7 +33,7 @@
                   class="icon-bar"></span> <span class="icon-bar"></span> <span
                   class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img>Brand</a>
+            <a id="brand" class="navbar-brand" href="#"><img>Brand</a>
          </div>
 
          <!-- Collect the nav links, forms, and other content for toggling -->
