@@ -18,8 +18,11 @@
    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
    crossorigin="anonymous">
 <script src="${context}/resources/js/app.js"></script>
+<script src="${context}/resources/js/cookie.js"></script>
+<script src="${context}/resources/js/fileupload.js"></script>
 <link rel=stylesheet href="${context}/resources/css/reset.css">
 <link rel=stylesheet href="${context}/resources/css/app.css">
+
 </head>
 <body>
    <nav id="boot-nav" class="navbar navbar-inverse">
@@ -42,7 +45,7 @@
             <ul class="nav navbar-nav">
                <li class="active"><a id="hospital" href="#">Hospital <span
                      class="sr-only">(current)</span></a></li>
-               <li><a href="#">Link</a></li>
+               <li><a id="bbs" href="#">bbs</a></li>
                <li class="dropdown"><a href="#" class="dropdown-toggle"
                   data-toggle="dropdown" role="button" aria-haspopup="true"
                   aria-expanded="false">Algorithm <span class="caret"></span></a>

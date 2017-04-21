@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import com.hospital.web.domain.Article;
+import com.hospital.web.domain.Chart;
 import com.hospital.web.domain.Doctor;
 import com.hospital.web.domain.Nurse;
 import com.hospital.web.domain.Patient;
@@ -15,12 +17,15 @@ public interface Mapper {
 	public int registDoctor(Object o)throws Exception;
 	public int registNurse(Object o)throws Exception;
 	public int registAdmin(Object o)throws Exception;
+	public int registerChartFile(Object o)throws Exception;
 	public Patient findPatient(Map<?,?> Hashmap)throws Exception;
 	public Doctor findDoctor(Map<?,?> Hashmap)throws Exception;
 	public Nurse findNurse(Map<?,?> Hashmap)throws Exception;
+	public List<Chart> chartList(Map<?,?> HashMap)throws Exception;
 	public List<Patient> findPatients(Map<?,?> Hashmap)throws Exception;
 	public List<Doctor> findDoctors(Map<?,?> Hashmap)throws Exception;
 	public List<Nurse> findNurses(Map<?,?> Hashmap)throws Exception;
+	public List<Article> articleList(Map<?,?> Hashmap)throws Exception;
 	public int updatePatient(Object o)throws Exception;
 	public int updateDoctor(Object o)throws Exception;
 	public int updateNurse(Object o)throws Exception;

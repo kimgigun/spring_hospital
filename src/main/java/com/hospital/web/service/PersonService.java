@@ -28,7 +28,6 @@ public class PersonService {
 		IGetService service= (map)->mapper.findPatient(map); 
 		return (Patient) service.execute(paramMap);
 	}
-
 	@SuppressWarnings("unused")
 	public Doctor getDoctor(Map<?,?> paramMap)throws Exception{
 		IGetService service= (map)->mapper.findDoctor(map); 

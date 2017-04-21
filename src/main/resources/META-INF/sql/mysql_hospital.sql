@@ -233,3 +233,35 @@ rank VARCHAR(2) );
 INSERT INTO	Member(id,name,ssn,password,profileImg,phone,email,rank)
 VALUES('hong','íê¸¸ë','800101-1','1','default.jpg','010-1233-1242','kim@hanbit.com','c');
 	
+DROP VIEW chartView;
+
+create VIEW chartView
+as SELECT
+p.pat_id AS patient,
+p.nur_id AS nurseId,
+p.doc_id AS doctorId,
+p.pat_name AS name,
+p.pat_pass AS pass,
+p.pat_gen AS gen,
+p.pat_jumin AS jumin,
+p.pat_addr AS addr,
+p.pat_phone AS phone,
+p.pat_email AS email,
+p.pat_job AS job,
+c.chart_contents AS chart_contents,
+c.chart_id as chart_id,
+d.major_treat AS doctorMajor,
+d.doc_name AS docName,
+n.nur_name AS nurseName,
+n.nur_position AS nurPosition,
+t.treat_contents AS treatContents,
+t.treat_date AS treatDate
+FROM
+Patient p
+LEFT JOIN chart c ON c.pat_id=p.pat_id
+LEFT JOIN Doctor d on d.doc_id =p.doc_id
+LEFT JOIN Nurse n ON n.nur_id=p.nur_id
+LEFT JOIN Treatment t ON t.pat_id=p.pat_id;
+commit;
+
+

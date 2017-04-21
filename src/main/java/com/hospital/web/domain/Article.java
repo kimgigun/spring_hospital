@@ -6,10 +6,10 @@ import lombok.Data;
 public class Article {
 	
 	private String seq,
-	 				id,
+	 				writerId,
 	 				title,
 	 				content,
-	 				regdate,
+	 				regDate,
 	 				readCount;
 
 	public String getSeq() {

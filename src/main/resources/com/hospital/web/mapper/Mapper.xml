@@ -36,8 +36,41 @@
 		<result property="email" column="nur_email" />
 		<result property="position" column="nur_position" />
 	</resultMap>
+	<resultMap id="Chart" type="com.hospital.web.domain.Chart">
+		 <id property="id" column="chartId"/>
+      <result property="patientId" column="patientId"/>
+      <result property="nurseId" column="nurseId"/>
+      <result property="doctorId" column="doctorId"/>
+      <result property="pass" column="pass"/>
+      <result property="name" column="name"/>
+      <result property="gen" column="gen"/>
+      <result property="jumin" column="jumin"/>
+      <result property="major" column="major"/>
+      <result property="phone" column="phone"/>
+      <result property="email" column="email"/>
+      <result property="job" column="job"/>
+      <result property="treatmentId" column="treatmentId"/>
+      <result property="chartContents" column="chartContents"/>
+      <result property="doctorMajor" column="doctorMajor"/>
+      <result property="doctorName" column="doctorName"/>
+      <result property="doctorPosition" column="doctorPosition"/>
+      <result property="nurseName" column="nurseName"/>
+      <result property="nurPosition" column="nurPosition"/>
+      <result property="treatContents" column="treatContents"/>
+      <result property="treatDate" column="treatDate"/>
+	</resultMap>
+	<resultMap id="Article" type="com.hospital.web.domain.Article">
+		 <id property="id" column="chartId"/>
+      <result property="writerId" column="writer_id"/>
+      <result property="name" column="name"/>
+      <result property="title" column="title"/>
+      <result property="content" column="content"/>
+      <result property="regDate" column="reg_date"/>
+      <result property="readCount" column="read_count"/>
+	</resultMap>
 
 	<!--C -->
+	
 	<insert id="registPatient">
 		INSERT INTO
 		${group}(pat_id,pat_pass,pat_name,pat_gen,pat_phone,pat_email,pat_job,pat_jumin,pat_addr,doc_id,nur_id)
@@ -56,6 +89,10 @@
 		VALUES ( #{id}, #{pass}, #{name}, #{gen}, #{phone}, #{email},#{major},
 		#{position})
 	</insert>
+	<insert id="registChart">
+		INSERT INTO
+		Chart(chart_contents) VALUES(#{file}) WHERE chart_id=#{chartId}
+	</insert>
 
 
 	<!--R -->
@@ -69,6 +106,7 @@
 	<select id="findNurse" resultMap="Nurse" parameterType="hashMap">
 		SELECT * FROM ${group} WHERE ${key} = #{value}
 	</select>
+	
 
 
 	<select id="findPatients" resultMap="Patient" parameterType="hashMap">
@@ -84,6 +122,11 @@
 			AND author_name like #{author.name}
 		</if>
 
+	</select>
+	
+	<select id="chartList" resultMap="Chart" parameterType="hashMap">
+		SELECT * FROM ChartView
+		WHERE patientId = #{id}
 	</select>
 	<select id="findDoctors" resultMap="Doctor" parameterType="hashMap">
 		SELECT * FROM ${group}
@@ -111,6 +154,10 @@
 		<if test="author != null and author.name != null">
 			AND author_name like #{author.name}
 		</if>
+	</select>
+	
+	<select id="articleList" resultMap="Article" parameterType="hashMap">
+		SELECT * FROM ${group} WHERE ${key} = #{value}
 	</select>
 
 	<!--U -->
