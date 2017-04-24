@@ -16,25 +16,37 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hospital.web.domain.Article;
+import com.hospital.web.domain.Chart;
 import com.hospital.web.mapper.Mapper;
-import com.hospital.web.service.IListService;
+import com.hospital.web.service.BoardService;
 
 
-@RestController
+@RestController	
 public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	@Autowired Mapper mapper;
 	@Autowired Article article;
+	@Autowired BoardService boardService;
 	@RequestMapping("/list/bbs/{pageNo}")
 	public @ResponseBody Map<?,?> goList(
-			@RequestBody Map<String,Object> paramMap,
 			@PathVariable String pageNo) throws Exception{
 		logger.info("BoardController() {}","진입");
 		Map<String,Object> map =new HashMap<>();
-		IListService service=(b)->mapper.articleList(b) ;
-		@SuppressWarnings("unchecked")
-		List<Article> list= (List<Article>) service.execute(paramMap);
+		map.put("start", "1");
+		map.put("end", "5");
+		map.put("group","Article");
+		System.out.println("★★★★★★"+mapper.count(map));
+		List<Chart> list=boardService.boardList(map);
+		Integer count=boardService.getTheNumberOfArticles(map);
+		map.clear();
 		map.put("list",list);
+		map.put("count",list.size());
+		map.put("prevBlock", 0);
+		map.put("blockStart", "1");
+		map.put("blockEnd", "5");
+		map.put("pageNo", "1");
+		map.put("nextBlock",2);
+		map.put("pageCount",count/5);
 		return map;
 	}
 	

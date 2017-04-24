@@ -386,7 +386,7 @@ app.algorithm=(function(){
                  a : 6,
                   b : 7,
                   c : 8,
-                  d : 9,
+                  d : 9,	
                   e : 10
               },
               {
@@ -550,7 +550,7 @@ app.bbs=(function(){
 			var row='';
 			$.getJSON(context+'/list/bbs/1',function(data){
 			$.each(data.list,function(i,item){
-				row+=+'<tr>'
+				row+='<tr>'
 					+'<td>'+(i+1)+'</td>'
 					+'<td><a href="#">'+item.title+'</td>'
 					+'<td>'+item.writerId+'</td>'
@@ -561,10 +561,30 @@ app.bbs=(function(){
 			table+=row;
 			table+=+'</tbody></table>'
 			wrapper.html(table);
-				$('#count').text('게시글수'+data.count);
-				var pagination='<nav id="pagnation" aria-label="Page navigation" align="center" ><ul class="pagnation" >'
+				$('#count').text('총 게시글수:'+data.count);
+				var pagination='<nav id="pagination" aria-label="Page navigation" align="center" ><ul class="pagination" >'
 				var $table=$('#table');
 				var $pagination=$('#pagination');
+				//17024
+				var temp='';
+				if(data.prevBlock>0){
+					temp+='<a href='+context+'"/list/bbs/'+data.prevBlock+'">◀prev</a>';
+					}
+				pagination+=temp;
+				var li='<li>';
+				for(var i=data.blockStart;i<=data.blockEnd;i++){
+					if(i==data.pageNo){
+						li+='<a href="#"><font>'+i+'</font></a>'
+					}else{li+='<a href="'+context+'/list/bbs/'+i+'">'+i+'</a>'
+				}
+				}
+					pagination+=li;
+					if(data.nextBlock<=data.pageCount){
+						temp+='<a href="'+context+'/list/bbs/'+data.nextBlock+'">next▶</a>';
+					}
+					pagination+=temp;
+					pagination+='</ul></nav></div></div>'
+					wrapper.append(pagination);
 				$('#container').addClass('app.width-full-size');
 				$('#container>div').addClass('app-margin-center').css('width','500px');
 				$table.addClass('app-table').addClass('app-margin-center').css('width','500px').css('height','180px');
@@ -1094,7 +1114,7 @@ app.style=(function(){
   				+'<input type="button" value="검색"/>'
   				+'<table id="table"><thead>'
   				+'<tr>'
-  				+'<td>총게시글수: </td>'
+  				+'<td id="count"></td>'
   				+'</tr>'
   				+'<tr>'
   				+'<th>번호</th>'
@@ -1103,9 +1123,6 @@ app.style=(function(){
   				+'<th>날짜</th>'
   				+'<th>조회수</th>'
   				+'</tr></thead><tbody>';
-  				
-  			
-  				'<nav id="pagination">'
   				+'<ul>'
   				//if문
   				+'<c:if test="${requestScope.prevBlock gt 0}">'

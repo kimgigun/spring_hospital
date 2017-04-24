@@ -7,6 +7,7 @@ public class Article {
 	
 	private String seq,
 	 				writerId,
+	 				name,
 	 				title,
 	 				content,
 	 				regDate,

@@ -87,3 +87,30 @@ DELETE FROM Article WHERE hong = 'hong';
 SELECT art_seq,writer_id,title,content,reg_date,read_count  FROM Article WHERE title LIKE '%안%';
 
 SELECT COUNT(*) AS count FROM Article;
+
+
+<!-- 아이디와 제목검색 -->
+SELECT t2.*
+	  FROM(SELECT @ROWNUM :=@ROWNUM +1 
+	  AS rownum,t.title,t.content,t.reg_date,t.art_seq
+	  FROM Article t,(SELECT @ROWNUM :=0) R WHERE t.writer_id="hong" AND t.title LIKE '%안%' ORDER BY t.reg_date DESC) t2
+	  WHERE t2.rownum between 1 and 10
+	  ORDER BY t2.rownum ASC;
+
+	  
+	  
+<!-- 아이디 검색 -->
+SELECT t2.*
+	  FROM(SELECT @ROWNUM :=@ROWNUM +1 
+	  AS rownum,t.title,t.content,t.reg_date,t.art_seq
+	  FROM Article t,(SELECT @ROWNUM :=0) R WHERE t.writer_id="hong" ORDER BY t.reg_date DESC) t2
+	  WHERE t2.rownum between 1 and 10
+	  ORDER BY t2.rownum ASC;
+	  
+	  <!-- 전체글 조회 -->
+SELECT t2.*
+	  FROM(SELECT @ROWNUM :=@ROWNUM +1 
+	  AS rownum,t.title,t.content,t.reg_date,t.art_seq
+	  FROM Article t,(SELECT @ROWNUM :=0) R ORDER BY t.reg_date DESC) t2
+	  WHERE t2.rownum between 1 and 10
+	  ORDER BY t2.rownum ASC;
